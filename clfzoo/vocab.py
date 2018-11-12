@@ -36,7 +36,7 @@ class Vocab(object):
             self.add_char(token)
 
         if vocab_path is not None:
-            self.load_from_file(vocab_path)
+            self.load_file(vocab_path)
 
     def load_file(self, fname):
         with open(fname, 'r') as rf:
