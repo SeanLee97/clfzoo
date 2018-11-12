@@ -51,7 +51,7 @@ greeting    how are you.
 
 for chinese sample
 ```
-打招呼  你 最近 过得 怎样 啊？
+打招呼  你 最近 过得 怎样 啊 ？
 ```
 
 ### Usage
