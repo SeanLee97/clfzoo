@@ -1,6 +1,6 @@
 <p align="center">/ clfzoo /</p>
 
-Eng / [CN](https://github.com/SeanLee97/clfzoo/docs/ZH_README.md)
+Eng / [CN](https://github.com/SeanLee97/clfzoo/blob/master/docs/ZH_README.md)
 
 clfzoo is a toolkit for text classification. We have implemented some baseline models, such as TextCNN, TextRNN, RCNN, Transformer, HAN, DPCNN. And We have designed a unified and friendly API to train / predict / test the models. Looking forward to your code contributions and suggestions.
 
