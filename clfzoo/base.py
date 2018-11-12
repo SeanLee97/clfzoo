@@ -70,7 +70,7 @@ class BaseModel(object):
         }
         
 
-    def add_train_op(self, loss, clipper=-1):
+    def add_train_op(self, loss):
         optim_type = self.config.optimizer.lower()
         with tf.variable_scope("train_scope"):
             if optim_type == 'adam':
@@ -86,9 +86,9 @@ class BaseModel(object):
             else:
                 raise NotImplementedError("Optimizer {} is not support".format(optim_type))
             
-            if clipper > 0:
+            if self.config.clipper > 0:
                 grads, vs     = zip(*optimizer.compute_gradients(loss))
-                grads, gnorm  = tf.clip_by_global_norm(grads, clip)
+                grads, gnorm  = tf.clip_by_global_norm(grads, self.config.clipper)
                 self.train_op = optimizer.apply_gradients(zip(grads, vs))
             else:
                 self.train_op = optimizer.minimize(loss)
