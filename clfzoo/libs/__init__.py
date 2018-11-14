@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""copyright
-this is code from [artf](https://github.com/SeanLee97/artf), A lightweight tensorflow library.
-
-"""
-
 import tensorflow as tf
 
 from tensorflow.python.util import nest
@@ -17,11 +12,35 @@ from tensorflow.python.ops import clip_ops
 from functools import reduce
 from operator import mul
 
+def dropout(inputs, dropout_prob=None):
+    if dropout_prob is None or dropout_prob == 0.0:
+      return inputs
+
+    output = tf.nn.dropout(inputs, 1.0 - dropout_prob)
+    return output
 
 def mask_logits(inputs, mask, mask_value=-1e30):
     shape = inputs.get_shape().as_list()
     mask = tf.cast(mask, tf.float32)
     return inputs * mask + mask_value * (1. - mask)
+
+def gelu(inputs, scope='gelu', reuse=None):
+    """Gaussian Error Linear Unit.
+    
+    This is a smoother version of the ReLU.
+    Paper: https://arxiv.org/abs/1606.08415
+
+    Args:
+        - inputs: float Tensor
+        - scope: scope name
+        - reuse: whether to reuse
+
+    Returns:
+        `inputs` with the gelu activation applied.
+    """
+    with tf.variable_scope(scope, reuse=reuse):
+        alpha = 0.5 * (1.0 + tf.erf(inputs / tf.sqrt(2.0)))
+        return inputs * alpha
 
 def glu(inputs, scope='glu', reuse=None):
     """Gated Linear Units
@@ -61,7 +80,7 @@ def layer_norm(inputs, episilon=1e-8, scope="layer_norm", reuse=None):
         filters = inputs.get_shape()[-1]
 
         scale = tf.get_variable(
-            "scale", [filters], 
+            "scale", [filters],  
             initializer=tf.ones_initializer())
         gamma = tf.get_variable(
             "gamma", [filters], 
@@ -200,4 +219,3 @@ def total_params(variables):
         total_parameters += variable_parametes
     print("Total number of trainable parameters: {}".format(total_parameters))
     return total_parameters
-

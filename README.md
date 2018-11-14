@@ -166,7 +166,7 @@ We train all models in 20 epochs, and calculate metrics by sklearn metrics funct
 |   TextRNN |  0.84  | 0.83   |  0.82  |
 |   RCNN |  0.86  | 0.85   | 0.85   |
 |   DPCNN |  0.87  | 0.85  | 0.85 |
-|   Transformer |  0.67  | 0.65   | 0.64  |
+|   Transformer |  0.74  | 0.67   | 0.68  |
 |   HAN |  TODO  | TODO   | TODO   |
 
 **Attention!**  It seems that Transformer and HAN can`t perform well now, We will fix bugs and update their result later.
